@@ -1,0 +1,209 @@
+//1. Создай кортеж для двух человек с одинаковыми типами данных и параметрами.
+При том одни значения доставай по индексу, а другие — по параметру.
+Пример (для демонстрации задачи, чтобы было понимание, что надо делать):
+
+let someDateOne = (age: 0, name: "some name One", surname: "some surname One")
+let someDateTwo = (age: 0, name: "some name Two", surname: "some surname Two")
+someDateOne.surname
+someDateTwo.age
+
+
+//2
+let dayInMonth = [31,28,31,30,31,30,31,30,31,30,31,30]
+for (month, days) in dayInMonth.enumerated() {
+    print ("Месяц \(month + 1): \(days) дней")
+}
+
+
+/* 2.a выведи количество дней в каждом месяце
+ 
+let daysInMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
+for (month, days) in daysInMonths.enumerated() {
+    print("Месяц \(month + 1): \(days) дней")
+}
+/*
+ 
+ */*/
+/* 2.b используй еще один массив с именами месяцев чтобы вывести название месяца + количество дней
+ 
+let monthNames = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентярь", "Октябрь", "Ноябрь", "Декабрь"]
+let daysInMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+for (index, monthNames) in monthNames.enumerated() {
+    let days = daysInMonths [index]
+    print("\(monthNames): \(days) дней ")
+}
+*/
+
+/* 2.c сделай тоже самое, но используя массив кортежей с параметрами (имя месяца, количество дней)
+ 
+ 
+let monthsData = [("Январь", 31), ("Февраль", 28), ("Март", 31), ("Апрель", 30), ("Май", 31), ("Июнь", 30), ("Июль", 31), ("Август", 31), ("Сентябрь", 30), ("Октябрь", 31), ("Ноябрь", 30), ("Декабрь", 31)]
+
+for monthData in monthsData {
+    let monthName = monthData.0
+    let days = monthData.1
+    print("\(monthName): \(days) дней")
+}
+*/
+
+
+
+
+/* 2.d сделай тоже самое, только выведи дни в обратном порядке (порядок в исходном массиве не меняется)
+ 
+ 
+let monthsData = [("Январь", 31), ("Февраль", 28), ("Март", 31), ("Апрель", 30), ("Май", 31), ("Июнь", 30), ("Июль", 31), ("Август", 31), ("Сентябрь", 30), ("Октябрь", 31), ("Ноябрь", 30), ("Декабрь", 31)]
+
+for monthData in monthsData.reversed() {
+    let monthName = monthData.0
+    let days = monthData.1
+    print("\(monthName): \(days) дней")
+}
+
+ 
+ 
+ 
+ 
+ //для произвольно выбранной даты (месяц и день) //посчитай количество дней до конца года
+/*
+let daysInMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+func daysUntilEndOfYear(from month: Int, day: Int) -> Int {
+    var daysLeft = 0
+    if month >= 1 && month <= 12 {
+        daysLeft -= day
+        for i in month - 1..<daysInMonths.count {
+            daysLeft += daysInMonths[i]
+            
+        }
+    }
+    return daysLeft
+}
+let selectedMonth = 8
+let selectedDay = 9
+let daysRemaining = daysUntilEndOfYear(from: selectedMonth, day: selectedDay)
+print("До конца года осталось \(daysRemaining) дней")
+
+ */*/
+/*/Создай словарь, как журнал студентов, где имя и фамилия студента это ключ, а оценка за экзамен — значение.
+ var studentJournal = [
+ "Иван Иванов": 5,
+ "Мария Петрова": 4,
+ "Алексей Смирнов": 3,
+ "Екатерина Соколова": 4,
+ "Андрей Кузнецов": 3
+ ]
+ 
+ // Добавление новых записей
+ studentJournal["Ольга Морозова"] = 5
+ studentJournal["Дмитрий Васильев"] = 2
+ 
+ // Вывод оценок студентов
+ for (student, grade) in studentJournal {
+ print("\(student): \(grade)")
+ }
+ 
+ //Повысь студенту оценку за экзамен
+ 
+ let studentName = "Мария Петрова" // Имя и фамилия студента, которому нужно повысить оценку
+ let newGrade = 5 // Новая оценка
+ 
+ // Повышение оценки студента
+ studentJournal[studentName] = newGrade
+ 
+ // Вывод обновленных оценок студентов
+ for (student, grade) in studentJournal {
+ print("\(student): \(grade)")
+ }
+ */
+/*/
+ Если оценка положительная (4 или 5) или удовлетворительная (3), то выведи сообщение с поздравлением, отрицательная (1, 2) - отправь на пересдачу
+
+var studentJournal = [
+    "Иван Иванов": 4,
+    "Мария Петрова": 2,
+    "Алексей Смирнов": 3,
+    "Екатерина Соколова": 5,
+    "Андрей Кузнецов": 1
+]
+
+func getFeedbackMessage(grade: Int) -> String {
+    return {
+        switch grade {
+        case 4, 5:
+            return "Поздравляем! Получилось отлично!"
+        case 3:
+            return "Неплохо, но есть к чему стремиться."
+        case 1, 2:
+            return "Придется попробовать еще раз."
+        default:
+            return "Оценка не распознана."
+        }
+    }()
+}
+
+for (student, grade) in studentJournal {
+    let feedback = getFeedbackMessage(grade: grade)
+    print("\(student): \(feedback)")
+}
+    */
+
+//Добавь еще несколько студентов — это будут новые одногруппники!
+// Существующий журнал студентов
+/*
+var studentJournal = [
+    "Иван Иванов": 4,
+    "Мария Петрова": 2,
+    "Алексей Смирнов": 3,
+    "Екатерина Соколова": 5,
+    "Андрей Кузнецов": 1
+]
+
+// Добавление новых студентов
+studentJournal["Ольга Морозова"] = 4
+studentJournal["Дмитрий Васильев"] = 5
+
+// Вывод обновленных данных
+for (student, grade) in studentJournal {
+    print("\(student): \(grade)")
+}
+//Удали одного студента — он отчислен
+// Существующий журнал студентов
+var studentJournal = [
+    "Иван Иванов": 4,
+    "Мария Петрова": 2,
+    "Алексей Смирнов": 3,
+    "Екатерина Соколова": 5,
+    "Андрей Кузнецов": 1
+]
+
+// Имя студента, который отчислен
+let expelledStudent = "Андрей Кузнецов"
+
+// Удаление студента из журнала
+studentJournal.removeValue(forKey: expelledStudent)
+
+// Вывод обновленных данных
+for (student, grade) in studentJournal {
+    print("\(student): \(grade)")
+}
+*/
+//Посчитай средний балл всей группы по итогам экзамена.
+/*
+var studentJournal = [
+    "Иван Иванов": 4,
+    "Мария Петрова": 2,
+    "Алексей Смирнов": 3,
+    "Екатерина Соколова": 5,
+    "Андрей Кузнецов": 1,
+    "Ольга Морозова": 4,
+    "Дмитрий Васильев": 5,
+    "Светлана Николаева": 3
+]
+
+let totalGradeSum = studentJournal.values.reduce(0, +)
+let averageGrade = Double(totalGradeSum) / Double(studentJournal.count)
+
+print("Средний балл всей группы: \(averageGrade)")
+
+*/
